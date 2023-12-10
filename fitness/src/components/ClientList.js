@@ -13,13 +13,19 @@ import {
   Divider,
   IconButton,
   TextField,
-  
 } from '@mui/material';
+import { format, parse } from 'date-fns'; // Import parse function
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import clientsData from './clientsData'; 
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import clientsData from './clientsData';
 import UpdateIcon from '@mui/icons-material/Update';
+
+
 
 
 function ClientList({ onDeleteAppointment }) {
@@ -77,6 +83,7 @@ function ClientList({ onDeleteAppointment }) {
       appointments: [],
     });
   };
+
   useEffect(() => {
     setClients((prevClients) => {
       // If you need to update clients when clientsData changes, you can setClients(clientsData)
@@ -86,39 +93,62 @@ function ClientList({ onDeleteAppointment }) {
   }, []);
 
   return (
-    <div>
-      <div style={{ marginBottom: '30px' }}>
+    <div style={{ marginRight: '50px', marginLeft: '50px',marginBottom:'20px' }}>
+      <div style={{ marginBottom: '30px', display: 'flex', alignItems: 'center' }}>
         <TextField
           label="First Name"
           size="small"
           value={newClient.firstName}
           onChange={(e) => setNewClient({ ...newClient, firstName: e.target.value })}
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: '10px',   }}
         />
         <TextField
           label="Last Name"
           size="small"
           value={newClient.lastName}
           onChange={(e) => setNewClient({ ...newClient, lastName: e.target.value })}
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: '10px',   }}
         />
         <TextField
           label="Location"
           size="small"
           value={newClient.location}
           onChange={(e) => setNewClient({ ...newClient, location: e.target.value })}
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: '10px',   }}
         />
-        <TextField
-          label="Appointments"
-          size="small"
-          placeholder="yyyy-mm-dd hh:mm AM/PM"
-          value={newClient.appointments.join(',')}
-          onChange={(e) =>
-            setNewClient({ ...newClient, appointments: e.target.value.split(',') })
-          }
-          style={{ marginRight: '10px' }}
-        />
+
+<LocalizationProvider dateAdapter={AdapterDayjs} >
+  <DemoContainer components={['DateTimePicker']}>
+    <DateTimePicker
+   
+      className="custom-width"
+      label="Appointments"
+      size="small"
+      placeholder="yyyy-mm-dd hh:mm AM/PM"
+      value={
+        newClient.appointments.length > 0
+          ? parse(newClient.appointments[0], 'MM/dd/yyyy hh:mm a', new Date())
+          : null
+      }
+      onChange={(value) => {
+        if (value && value.isValid()) {
+          const formattedDateTime = format(value.toDate(), 'MM/dd/yyyy hh:mm a');
+          setNewClient({
+            ...newClient,
+            appointments: [formattedDateTime],
+          });
+        } else {
+          setNewClient({
+            ...newClient,
+            appointments: [],
+          });
+        }
+      }}
+    />
+  </DemoContainer>
+</LocalizationProvider>
+
+
         {isEditing ? (
           <IconButton variant="contained" color="primary" onClick={handleUpdateClient}>
             <UpdateIcon />
@@ -128,33 +158,33 @@ function ClientList({ onDeleteAppointment }) {
             variant="contained"
             color="primary"
             onClick={handleAddClient}
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px',   }}
           >
             <AddIcon />
           </IconButton>
         )}
       </div>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ border: '10px solid darkgrey' }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Location</TableCell>
-              <TableCell>Appointments</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>ID</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>First Name</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Last Name</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Location</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Appointments</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {clients.map((client) => (
               <TableRow key={client.id}>
-                <TableCell>{client.id}</TableCell>
-                <TableCell>{client.firstName}</TableCell>
-                <TableCell>{client.lastName}</TableCell>
-                <TableCell>{client.location}</TableCell>
-                <TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{client.id}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{client.firstName}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{client.lastName}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{client.location}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>
                   <List>
                     {client.appointments.map((appointment, index) => (
                       <div key={index}>
@@ -166,7 +196,7 @@ function ClientList({ onDeleteAppointment }) {
                     ))}
                   </List>
                 </TableCell>
-                <TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>
                   <IconButton
                     color="primary"
                     size="small"
@@ -188,7 +218,7 @@ function ClientList({ onDeleteAppointment }) {
         </Table>
       </TableContainer>
     </div>
-  );
+      );
 }
 
 export default ClientList;

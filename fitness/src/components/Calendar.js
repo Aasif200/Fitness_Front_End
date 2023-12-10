@@ -14,23 +14,23 @@ function Calendar({ clients }) {
   };
 
   return (
-    <div>
-      <h2>Calendar View</h2>
-      <TableContainer component={Paper}>
+    <div style={{  marginRight:'50px',marginLeft:'50px'}}>
+      <h2 style={{fontSize:"30px" ,marginLeft:"610px"}}>Calendar View</h2>
+      <TableContainer component={Paper} style={{ border: '10px solid darkgrey' }}>
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell>Time</TableCell>
-              <TableCell>Client</TableCell>
+          <TableHead >
+            <TableRow >
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Date</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Time</TableCell>
+              <TableCell style={{ border: '3px solid gray', padding: '10px' }}>Client</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody >
             {allAppointments.map((appointment, index) => (
               <TableRow key={index}>
-                <TableCell>{formatDateTime(appointment)}</TableCell>
-                <TableCell>{new Date(appointment).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
-                <TableCell>{getClientNameOrID(appointment, clients)}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{formatDateTime(appointment)}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{new Date(appointment).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
+                <TableCell style={{ border: '3px solid gray', padding: '10px' }}>{getClientNameOrID(appointment, clients)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

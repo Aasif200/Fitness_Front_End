@@ -5,28 +5,29 @@ import IconButton from '@mui/material/IconButton';
 import EventIcon from '@mui/icons-material/Event';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import clients from './components/clientsData'; // Update the path accordingly
+import clients from './components/clientsData'; 
+
 
 function App() {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh' }}>
       <Box  display="flex"
   alignItems="center"
   justifyContent="center"
   flexDirection="row">
-      <h1 >Fitness Trainer App</h1>
+      <h1 style={{fontSize:'60px'}} ><i>Fitness Trainer App</i></h1>
       </Box>
       <Box  display="flex"
   alignItems="center"
   justifyContent="center"
-  flexDirection="row" // Optional: If you want the items to be centered vertically
+  flexDirection="row" 
    mb={10} >
-        <Typography variant="h6" style={{ marginRight: '8px' }}>
+        <Typography variant="h5" style={{ marginRight: '8px' }}>
           Show Calendar:
         </Typography>
-        <IconButton onClick={() => setShowCalendar(!showCalendar)}>
+        <IconButton style={{backgroundColor:'white'}} onClick={() => setShowCalendar(!showCalendar)}>
           <EventIcon />
         </IconButton>
       </Box>

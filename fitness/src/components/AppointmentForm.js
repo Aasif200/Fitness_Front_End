@@ -20,6 +20,7 @@ function AppointmentForm({ client }) {
     updatedAppointments[index] = newDateTime;
     setAppointments(updatedAppointments);
   };
+  
 
   const handleDeleteAppointment = (index) => {
     const updatedAppointments = [...appointments];
