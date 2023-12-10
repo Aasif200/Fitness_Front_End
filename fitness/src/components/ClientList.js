@@ -14,7 +14,7 @@ import {
   IconButton,
   TextField,
 } from '@mui/material';
-import { format, parse } from 'date-fns'; // Import parse function
+import { format, parse } from 'date-fns';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -86,8 +86,7 @@ function ClientList({ onDeleteAppointment }) {
 
   useEffect(() => {
     setClients((prevClients) => {
-      // If you need to update clients when clientsData changes, you can setClients(clientsData)
-      // But make sure this won't cause an infinite loop
+      
       return clientsData;
     });
   }, []);

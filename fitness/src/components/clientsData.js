@@ -1,4 +1,3 @@
-// clientsData.js
 
 const clients = [
     { id: 1, firstName: 'John', lastName: 'Doe', location: 'Gym', appointments: ['2023-12-08 10:00 AM'] },

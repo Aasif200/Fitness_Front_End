@@ -38,7 +38,7 @@ function AppointmentForm({ client }) {
       <IconButton onClick={handleAddAppointment} color="primary">
         <AddCircleIcon />
       </IconButton>
-      {/* Display appointments and provide options for editing and deleting */}
+      
       <ul>
         {appointments.map((appointment, index) => (
           <li key={index}>
