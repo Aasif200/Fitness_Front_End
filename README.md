@@ -1,4 +1,4 @@
- It seems like you're describing the functionality and user interface of a Fitness Trainer Appointment Scheduling Website. Let me break down the points you provided:
+Describing the functionality and user interface of a Fitness Trainer Appointment Scheduling Website.
 
 Calendar Page:
 
